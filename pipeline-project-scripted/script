@@ -1,0 +1,22 @@
+node{
+	stage('Build'){
+		sh 'echo DevOps Build Phase'
+	}
+	stage('Test'){
+		sh 'echo DevOps Test Phase'
+	}
+	stage('Deploy'){
+		sh 'echo DevOps Deploy Phase'
+		
+	}
+	stage('Monitoring'){
+		sh 'echo DevOps Monitoring Phase'
+	}
+	stage('Security Scanning'){
+		sh 'pwd'
+		sh 'echo I am in Security Scanning Phase'
+	}
+	stage('Version'){
+		sh 'java --version'
+	}
+}
