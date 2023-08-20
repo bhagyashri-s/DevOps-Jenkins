@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+  parameters {
+    choice(
+      name: 'ec2_instance',
+      choices: ['Start', 'Stop'],
+      description: 'Status of ec2 instance'
+    )
+  }
+  stages {
+    stage('Start EC2 Instance') {
+        when {
+            expression { 
+               return params.ec2_instance == 'Start'
+            }
+        }
+        steps {
+            sh "aws ec2 start-instances --instance-ids i-0464d913a1188b3cc --region ap-south-1"
+            echo "EC2 instance is being started"
+        }
+    }
+    stage('Stop EC2 Instance') {
+        when {
+            expression { 
+               return params.ec2_instance == 'Stop'
+            }
+        }
+          steps {
+            sh "aws ec2 stop-instances --instance-ids i-0464d913a1188b3cc --region ap-south-1"
+            echo "EC2 instance is being stopped"
+          }
+    }
+    
+  }
+}
